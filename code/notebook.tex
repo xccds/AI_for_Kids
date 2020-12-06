@@ -1,0 +1,738 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{?11?-?????}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsubsection{本课提纲}\label{ux672cux8bfeux63d0ux7eb2}
+
+\begin{itemize}
+\tightlist
+\item
+  什么是最优化
+\item
+  梯度下降方法
+\item
+  遗传算法
+\item
+  练习
+\end{itemize}
+
+    \subsubsection{11.1
+什么是最优化}\label{ux4ec0ux4e48ux662fux6700ux4f18ux5316}
+
+    简单来讲，最优化就是找出函数的极值。假设有一个普通的二次方函数，例如
+\(y=x^2\),我们希望知道它的最小值在哪里。从下面的图可以看到，当x取0的时候，这个函数取值最小。更形象的解释就是，如果把这个函数看作是一座山，有一个生活在这座山上的小兔子，小兔子希望能跑到山的最低洼地方去，但是它的视力又不好，一眼看不到最低处，只能看到眼前的东西，那有什么办法可以到达最低处呢？
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}
+         \PY{n}{y} \PY{o}{=} \PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{)}\PY{p}{;}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_4_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{11.2 梯度下降}\label{ux68afux5ea6ux4e0bux964d}
+
+    如果小兔子看不到远处，但是可以看到近处，那么它会知道在它现在所处的这个地方，地势的高低走向是怎么样的。因为它生活在这个二维的山上，它只有两个方向可以选择和观察，向左走或是向右走。它可以观察到近处左边的地势和右边的地势。可以这样来思考一下，如果左边的地势比右边的地势低，那么有可能低洼处就在左边某个地方，所以从贪心算法的思路来看，我们就以当前位置的局部地势来判断，往低处走。往左走了一步之后，在以当前位置观察局部的地势，再进行判断决策。就这样循环往复，最终会找到山的最低处。
+
+    如果要编程来模仿小兔子的行动决策，我们还需要明确两个具体的东西，一是如何来判断局部的地势以决定走的方向，二是如何决定走的步子大小。对于第一个问题，我们可以联想到斜率这个概念，如果在山的某一个位置上，或者说在函数的某个点的位置上，这个点对应的斜率是可以算出来的，如果斜率是正数，说明左边比右边低，方向选择上就应该往左走，反之，如果斜率是负数，说明左边比右边高，方向选择上应该往右走。斜率在数学上也称之为导数或者梯度。对于第二个问题，可以想像的到，如果步子小，我们需要更多的步数才走到底部，如果步子大，可能需要较少的步数，但是呢，步子越大，可能会越过底部，走过头了。所以通常我们会设置一个谨慎的步长。
+
+    如果用一个公式来描述上述的思路就是： \(x = x - rate\times gx\)
+
+x是当前位置，rate是步长，gx是当前位置的斜率，在每一步，我们会算出当前位置的斜率gx，当gx为正也就是斜率为正，我们应该往左走，自然就是在当前位置上做减法，x就会变小；如果gx为负也就是斜率为负，和前面那个负号抵消后成为一个加法，x就会增加，就是往右走。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{k}{def} \PY{n+nf}{min\PYZus{}gred}\PY{p}{(}\PY{n}{x\PYZus{}start}\PY{p}{,} \PY{n}{rate}\PY{p}{,} \PY{n}{num}\PY{p}{,} \PY{n}{f}\PY{p}{,}\PY{n}{g}\PY{p}{)}\PY{p}{:}
+             \PY{n}{x} \PY{o}{=} \PY{n}{x\PYZus{}start}
+             \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{gx} \PY{o}{=} \PY{n}{g}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+                 \PY{n}{y} \PY{o}{=} \PY{n}{f}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+                 \PY{n}{x} \PY{o}{=} \PY{n}{x} \PY{o}{\PYZhy{}} \PY{n}{rate}\PY{o}{*}\PY{n}{gx} \PY{c+c1}{\PYZsh{} 梯度下降}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{X：}\PY{l+s+si}{\PYZob{}x:.2f\PYZcb{}}\PY{l+s+s2}{, Y：}\PY{l+s+si}{\PYZob{}y:.2f\PYZcb{}}\PY{l+s+s2}{，gx：}\PY{l+s+si}{\PYZob{}gx:.2f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{y}\PY{p}{,}\PY{n}{gx}\PY{o}{=}\PY{n}{gx}\PY{p}{)}\PY{p}{)}
+                 \PY{k}{if} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{gx}\PY{p}{)}\PY{o}{\PYZlt{}}\PY{l+m+mf}{0.0001}\PY{p}{:}
+                     \PY{k}{break}
+             \PY{k}{return} \PY{n}{x}
+                 
+\end{Verbatim}
+
+
+    下面我们来解释一下这个代码的含义，这个函数代码是上述的梯度下降思路来求某个函数的最小值。输入参数有四个，x\_start表示初始点的位置，也就是小兔子一开始的位置，rate是步长设置，num是走的步数，f是需要求最小值的那个函数，也就是山的形状，g是f的梯度函数，也就是对应山的每个位置的斜率可以通过g算出来。
+
+    在进入循环之后，每一步，我们会算出当前位置的斜率，存在gx中，再算出当前的高度y，再用一个梯度下降公式去修正x的值，因为gx为正也就是斜率为正，我们应该往左走，自然就是在当前位置上做减法，如果gx为负也就是斜率为负，和前面那个负号抵消后成为一个加法，x就会增加，就是往右走。
+
+    同时为了显示每一步的信息，我们打印出这几个变量的值，以方便我们调试和理解，最后有一个条件判断，当斜率非常小的时候，说明地势已经很平了，可能已经到最低点了，可以提前终止。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{n}{f} \PY{o}{=} \PY{k}{lambda} \PY{n}{x}\PY{p}{:}\PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+         \PY{n}{g} \PY{o}{=} \PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{x}
+\end{Verbatim}
+
+
+    为了计算平方函数的最小值，我们需要定义这个二次方函数，存放在f中，同时定义好二次方函数对应的梯度函数。梯度函数g就是对f的求导结果。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}65}]:} \PY{n}{min\PYZus{}gred}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,}\PY{n}{f}\PY{p}{,}\PY{n}{g}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+X：1.60, Y：4.00，gx：4.00
+X：1.28, Y：2.56，gx：3.20
+X：1.02, Y：1.64，gx：2.56
+X：0.82, Y：1.05，gx：2.05
+X：0.66, Y：0.67，gx：1.64
+X：0.52, Y：0.43，gx：1.31
+X：0.42, Y：0.27，gx：1.05
+X：0.34, Y：0.18，gx：0.84
+X：0.27, Y：0.11，gx：0.67
+X：0.21, Y：0.07，gx：0.54
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}65}]:} 0.21474836480000006
+\end{Verbatim}
+            
+    我们来运行这个代码，如果初始点为2，步长为0.1，走10步，我们会发现由于每一步走的比较小，最后我们走到了x=0.21这个位置，此时比较靠近0了，但是并未达到最小值。不过从打印的信息中可以看到，x是慢慢靠近0的，而且y也是在减小的，说明走的方向是对的，只不过还没走到。这时我们可以调大步数，或是调大步长。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}71}]:} \PY{n}{min\PYZus{}gred}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mf}{0.3}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,}\PY{n}{f}\PY{p}{,}\PY{n}{g}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+X：0.80, Y：4.00，gx：4.00
+X：0.32, Y：0.64，gx：1.60
+X：0.13, Y：0.10，gx：0.64
+X：0.05, Y：0.02，gx：0.26
+X：0.02, Y：0.00，gx：0.10
+X：0.01, Y：0.00，gx：0.04
+X：0.00, Y：0.00，gx：0.02
+X：0.00, Y：0.00，gx：0.01
+X：0.00, Y：0.00，gx：0.00
+X：0.00, Y：0.00，gx：0.00
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}71}]:} 0.00020971520000000014
+\end{Verbatim}
+            
+    将步长调整到0.3之后，发现x已经非常接近0了，目标达到了。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}81}]:} \PY{n}{min\PYZus{}gred}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mf}{1.1}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,}\PY{n}{f}\PY{p}{,}\PY{n}{g}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+X：-2.40, Y：4.00，gx：4.00
+X：2.88, Y：5.76，gx：-4.80
+X：-3.46, Y：8.29，gx：5.76
+X：4.15, Y：11.94，gx：-6.91
+X：-4.98, Y：17.20，gx：8.29
+X：5.97, Y：24.77，gx：-9.95
+X：-7.17, Y：35.66，gx：11.94
+X：8.60, Y：51.36，gx：-14.33
+X：-10.32, Y：73.95，gx：17.20
+X：12.38, Y：106.49，gx：-20.64
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}81}]:} 12.383472844800014
+\end{Verbatim}
+            
+    当我们将步长调整到1.1之后，发现不仅没有接近最小值，反而越走越远。这是因为步长设置的过大，出现震荡现象。
+
+    小结：梯度下降是一种寻找函数极值的思路，它需要知道三个因素后进行循环计算，以逼近极值，这三个因素分别是初始的位置，函数的导数，步长。如果步长设置的过小，会花费很多步数才会到达极值，如果步长设置过大，会导致无法到达极值位置。
+
+    \subsubsection{11.3 遗传算法}\label{ux9057ux4f20ux7b97ux6cd5}
+
+    遗传算法是受到大自然规律的启发，如果一个生物种群要在自然界生存下去，它必须将优秀的个体遗传到下一代。以长颈鹿这个种群为例，因为自然竞争，低处的植物被很多动物吃掉了，为了生存，它们的身高需要越来越高，否则无法吃到高处的食物。上一代的长颈鹿产生下一代时，下一代的身高不会都能够到高处的食物，那些身高不足的下一代必然容易夭折早亡，那些有足够身高的下一代自然容易存活，并给再下一代传续它们的身高基因。
+
+    从自然界的规律出发，我们可以将二次方函数想像成一个生态环境，只有在低洼处生活的小兔子才有水喝，才能够生存下来。假设一开始有一群小兔子，随机分散在二次方函数那座山上，不同高度的动物得到的水不同，越低处水资源越丰富，存活度越高，高处的动物不容易留存，而低处的动物容易存活从而留下它们的基因，低处动物的下一代会更容易往低处走，从而找到最低点。
+
+    为了后面编程方便，我们需要定义相关的术语。
+
+\begin{itemize}
+\tightlist
+\item
+  种群：在生态环境中是一群生物，在二次方函数中是一组X
+\item
+  个体：在生态环境中是单个生物，在二次方函数中是一个X
+\item
+  杂交：在生态环境中是两个上一代的生物产生下一代，在二次方函数中是两个X进行加权求合
+\item
+  变异：在生态环境中是某个下一代的生物特征产生突变，在二次方函数中是某个X进行随机加减
+\item
+  适应度：在生态环境中是生物个体或种群对于环境的存活性，在二次方函数中是X对应的高度，我们希望找到最低点，所以越低越好。
+\item
+  父代和子代：在生态环境中是上一代和下一代，在二次方函数中迭代的前一次和后一次两组X
+\end{itemize}
+
+    首先我们初始化种群，产生最初一代的X，包括10个个体，分散在-2到+2之间的区间上。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}119}]:} \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}
+          \PY{k}{def} \PY{n+nf}{func}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+              \PY{k}{return} \PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+          \PY{n}{y} \PY{o}{=} \PY{n}{func}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}140}]:} \PY{n}{num} \PY{o}{=} \PY{l+m+mi}{10}
+          \PY{n}{pop} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{n}{low}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{high}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{size}\PY{o}{=}\PY{n}{num}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}141}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{)}\PY{p}{;}
+          \PY{n}{y\PYZus{}fit} \PY{o}{=} \PY{p}{[}\PY{n}{func}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{pop}\PY{p}{]}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{pop}\PY{p}{,} \PY{n}{y\PYZus{}fit}\PY{p}{,}\PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_29_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    定义适应度，用于评估个体和种群的质量，因为我们希望找到最低点，所以用二次方函数加负号来表示，这样一来，越在山高处的点，适应度值越小，越在山低处的点，适应度值越大，质量越好。此外，如果对于-2和+2以外的点，设置为一个比较大的负数，以表示质量很差。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}121}]:} \PY{k}{def} \PY{n+nf}{fitness}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+              \PY{k}{if} \PY{p}{(}\PY{n}{x}\PY{o}{\PYZgt{}}\PY{l+m+mi}{2} \PY{o+ow}{or} \PY{n}{x}\PY{o}{\PYZlt{}}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}  
+                  \PY{k}{return} \PY{o}{\PYZhy{}}\PY{l+m+mi}{100}
+              \PY{k}{else}\PY{p}{:} 
+                  \PY{k}{return} \PY{o}{\PYZhy{}}\PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+\end{Verbatim}
+
+
+    利用前面的函数计算出整体种群的质量
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}122}]:} \PY{k}{def} \PY{n+nf}{fitness\PYZus{}pop}\PY{p}{(}\PY{n}{pop}\PY{p}{)}\PY{p}{:}
+              \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{fitness}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{pop}\PY{p}{)}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{pop}\PY{p}{)}
+          
+          \PY{n}{fitness\PYZus{}pop}\PY{p}{(}\PY{n}{pop}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}122}]:} -1.7311609764341587
+\end{Verbatim}
+            
+    质量高的优秀个体更容易存活和有下一代，为了体现这一点，我们将适应度转换为一个选择概率，以方便后续计算。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}124}]:} \PY{k}{def} \PY{n+nf}{fitness\PYZus{}prob}\PY{p}{(}\PY{n}{pop}\PY{p}{)}\PY{p}{:}
+              \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{p}{[}\PY{n}{fitness}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{pop}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{p}{[}\PY{n}{fitness}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{pop}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{fitness\PYZus{}prob}\PY{p}{(}\PY{n}{pop}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}124}]:} array([0.02055009, 0.0127873 , 0.03558897, 0.30580228, 0.17240482,
+                 0.13704312, 0.013488  , 0.18353671, 0.08567397, 0.03312475])
+\end{Verbatim}
+            
+    定义杂交函数，对父代双亲进行加权求和，权重是一个随机值。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}126}]:} \PY{k}{def} \PY{n+nf}{crossover}\PY{p}{(}\PY{n}{p1}\PY{p}{,}\PY{n}{p2}\PY{p}{)}\PY{p}{:}
+              \PY{n}{weight} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{p}{)}
+              \PY{n}{p1\PYZus{}sub} \PY{o}{=} \PY{n}{p1}\PY{o}{*}\PY{n}{weight}
+              \PY{n}{p2\PYZus{}sub} \PY{o}{=} \PY{n}{p2}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{weight}\PY{p}{)}
+              \PY{n}{children} \PY{o}{=} \PY{n}{p1\PYZus{}sub}\PY{o}{+}\PY{n}{p2\PYZus{}sub}
+              \PY{k}{return} \PY{n}{children}
+\end{Verbatim}
+
+
+    定义变异函数，对某个X进行随机的加减，相当于对局部周围进行了随机搜索。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}127}]:} \PY{k}{def} \PY{n+nf}{mutate}\PY{p}{(}\PY{n}{p}\PY{p}{)}\PY{p}{:}
+              \PY{n}{step} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{p}{)}\PY{o}{*}\PY{l+m+mf}{0.1}
+              \PY{n}{children} \PY{o}{=} \PY{n}{p}\PY{o}{+}\PY{n}{step}
+              \PY{k}{return} \PY{n}{children}
+\end{Verbatim}
+
+
+    设置一些进化参数，有多少比例的个体会参与杂交，有多少会参与变异
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}128}]:} \PY{c+c1}{\PYZsh{} 进化参数}
+          \PY{n}{cross\PYZus{}rate} \PY{o}{=} \PY{l+m+mf}{0.8} \PY{c+c1}{\PYZsh{} 杂交率}
+          \PY{n}{mut\PYZus{}rate} \PY{o}{=} \PY{l+m+mf}{0.1} \PY{c+c1}{\PYZsh{} 变异率}
+\end{Verbatim}
+
+
+    开始遗传进化的循环操作。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}136}]:} \PY{c+c1}{\PYZsh{} begin}
+          \PY{n}{pop\PYZus{}parent} \PY{o}{=} \PY{n}{pop}
+          \PY{n}{pop\PYZus{}fit} \PY{o}{=} \PY{n}{fitness\PYZus{}pop}\PY{p}{(}\PY{n}{pop\PYZus{}parent}\PY{p}{)}
+          
+          \PY{n}{iter\PYZus{}num} \PY{o}{=} \PY{l+m+mi}{0}
+          \PY{k}{while} \PY{n}{iter\PYZus{}num} \PY{o}{\PYZlt{}} \PY{l+m+mi}{10}\PY{p}{:}
+              \PY{n}{pop\PYZus{}children}  \PY{o}{=} \PY{n}{pop\PYZus{}parent}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+              \PY{n}{prob} \PY{o}{=} \PY{n}{fitness\PYZus{}prob}\PY{p}{(}\PY{n}{pop\PYZus{}children}\PY{p}{)}  \PY{c+c1}{\PYZsh{} 计算父群适应度概率}
+              \PY{n}{parent1\PYZus{}num} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{cross\PYZus{}rate}\PY{o}{*}\PY{n}{num}\PY{p}{)}  \PY{c+c1}{\PYZsh{} 根据杂交概率计算杂交数量}
+              \PY{c+c1}{\PYZsh{} 从个体中抽取待杂交基因编号}
+              \PY{n}{cross\PYZus{}index} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n}{num}\PY{p}{,} \PY{n}{parent1\PYZus{}num}\PY{p}{,} \PY{n}{replace}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)} 
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{cross\PYZus{}index}\PY{p}{:} \PY{c+c1}{\PYZsh{} 待杂交个体和其它随机个体进行杂交}
+                  \PY{n}{pop\PYZus{}children}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{crossover}\PY{p}{(}\PY{n}{pop\PYZus{}children}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{pop\PYZus{}children}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{pop\PYZus{}children}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{p}\PY{o}{=}\PY{n}{prob}\PY{p}{)}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+          
+              \PY{n}{mut\PYZus{}num} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{mut\PYZus{}rate}\PY{o}{*}\PY{n}{num}\PY{p}{)} \PY{c+c1}{\PYZsh{} 计算待变异基因数量}
+              \PY{n}{mut\PYZus{}index} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n}{num}\PY{p}{,} \PY{n}{mut\PYZus{}num}\PY{p}{,}\PY{n}{replace}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}  \PY{c+c1}{\PYZsh{} 抽取待变异基因编号}
+          
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{mut\PYZus{}index}\PY{p}{:}
+                  \PY{n}{pop\PYZus{}children}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{mutate}\PY{p}{(}\PY{n}{pop\PYZus{}children}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)} 
+              \PY{c+c1}{\PYZsh{} 上下双代合并排序}
+              \PY{n}{pop\PYZus{}group} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{pop\PYZus{}children}\PY{p}{,}\PY{n}{pop\PYZus{}parent}\PY{p}{]}\PY{p}{)}
+              \PY{n}{prob} \PY{o}{=} \PY{n}{fitness\PYZus{}prob}\PY{p}{(}\PY{n}{pop\PYZus{}group}\PY{p}{)}
+              \PY{n}{next\PYZus{}index} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{n}{prob}\PY{p}{)}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{n}{num}\PY{p}{:}\PY{p}{]}
+              \PY{n}{pop\PYZus{}parent} \PY{o}{=} \PY{n}{pop\PYZus{}group}\PY{p}{[}\PY{n}{next\PYZus{}index}\PY{p}{]} \PY{c+c1}{\PYZsh{} 优秀的变成下一代}
+              \PY{n}{pop\PYZus{}fit} \PY{o}{=} \PY{n}{fitness\PYZus{}pop}\PY{p}{(}\PY{n}{pop\PYZus{}children}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{第}\PY{l+s+si}{\PYZob{}n\PYZcb{}}\PY{l+s+s2}{代种群的适应度：}\PY{l+s+si}{\PYZob{}x:.3f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{n}\PY{o}{=}\PY{n}{iter\PYZus{}num}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{n}{pop\PYZus{}fit}\PY{p}{)}\PY{p}{)}
+              \PY{n}{iter\PYZus{}num} \PY{o}{=} \PY{n}{iter\PYZus{}num} \PY{o}{+} \PY{l+m+mi}{1}   \PY{c+c1}{\PYZsh{} 进入下一轮}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+第0代种群的适应度：-1.373
+第1代种群的适应度：-0.389
+第2代种群的适应度：-0.094
+第3代种群的适应度：-0.025
+第4代种群的适应度：-0.018
+第5代种群的适应度：-0.005
+第6代种群的适应度：-0.004
+第7代种群的适应度：-0.001
+第8代种群的适应度：-0.001
+第9代种群的适应度：-0.001
+
+    \end{Verbatim}
+
+    我们总共安排了10次迭代，也就是10次进化。每次进化分为三个步骤，第一个步骤是选出高质量的个体和其它个体进行杂交，第二个步骤是选出高质量的个体进行变异，第三步是将上一代和杂交变异后的下一代合并评估，找出质量较高的个体保留，进入下一轮进化。可以观察到每一轮进化得到的种群质量是不断提高的。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}137}]:} \PY{n}{pop\PYZus{}children}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}137}]:} array([-0.03408096, -0.03408096, -0.03408096, -0.03408096, -0.03408096,
+                 -0.03408096, -0.04162594, -0.03408096,  0.02211625,  0.00873233])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}139}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{)}\PY{p}{;}
+          \PY{n}{pop\PYZus{}fit} \PY{o}{=} \PY{p}{[}\PY{n}{func}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{pop\PYZus{}children}\PY{p}{]}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{pop\PYZus{}children}\PY{p}{,} \PY{n}{pop\PYZus{}fit}\PY{p}{,}\PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_46_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    现在再来观察进化后的种群，所有的X都非常靠近0，可以认为种群进化成功，找到了环境的最优点，或者说二次方函数的最小值。
+
+    \subsubsection{11.3 练习}\label{ux7ec3ux4e60}
+
+    使用上述的两种方法，去寻找sin函数在-10到+10之间的最小值在哪里。它的图形对应如下。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}145}]:} \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}
+          \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_50_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    提示一下，如果不知道sin函数对应的梯度函数，可以直接用sympy模块来计算，结果发现cos函数。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}147}]:} \PY{k+kn}{from} \PY{n+nn}{sympy} \PY{k}{import} \PY{n}{Symbol}\PY{p}{,} \PY{n}{diff}\PY{p}{,}\PY{n}{sin}
+          \PY{n}{x} \PY{o}{=} \PY{n}{Symbol}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{diff}\PY{p}{(}\PY{n}{sin}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,}\PY{n}{x}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}147}]:} cos(x)
+\end{Verbatim}
+            
+    受篇幅所限，我们只尝试梯度下降方法，遗传算法可以读者自行尝试。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k}{def} \PY{n+nf}{min\PYZus{}gred}\PY{p}{(}\PY{n}{x\PYZus{}start}\PY{p}{,} \PY{n}{rate}\PY{p}{,} \PY{n}{num}\PY{p}{,} \PY{n}{f}\PY{p}{,}\PY{n}{g}\PY{p}{)}\PY{p}{:}
+            \PY{n}{x} \PY{o}{=} \PY{n}{x\PYZus{}start}
+            \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num}\PY{p}{)}\PY{p}{:}
+                \PY{n}{gx} \PY{o}{=} \PY{n}{g}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+                \PY{n}{y} \PY{o}{=} \PY{n}{f}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+                \PY{n}{x} \PY{o}{=} \PY{n}{x} \PY{o}{\PYZhy{}} \PY{n}{rate}\PY{o}{*}\PY{n}{gx} \PY{c+c1}{\PYZsh{} 梯度下降}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{X：}\PY{l+s+si}{\PYZob{}x:.2f\PYZcb{}}\PY{l+s+s2}{, Y：}\PY{l+s+si}{\PYZob{}y:.2f\PYZcb{}}\PY{l+s+s2}{，gx：}\PY{l+s+si}{\PYZob{}gx:.2f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{y}\PY{p}{,}\PY{n}{gx}\PY{o}{=}\PY{n}{gx}\PY{p}{)}\PY{p}{)}
+                \PY{k}{if} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{gx}\PY{p}{)}\PY{o}{\PYZlt{}}\PY{l+m+mf}{0.0001}\PY{p}{:}
+                    \PY{k}{break}
+            \PY{k}{return} \PY{n}{x}     
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{f} \PY{o}{=} \PY{k}{lambda} \PY{n}{x}\PY{p}{:}\PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+        \PY{n}{g} \PY{o}{=} \PY{k}{lambda} \PY{n}{x}\PY{p}{:}\PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{min\PYZus{}gred}\PY{p}{(}\PY{l+m+mf}{0.1}\PY{p}{,}\PY{l+m+mf}{0.2}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{,}\PY{n}{f}\PY{p}{,}\PY{n}{g}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+X：-0.10, Y：0.10，gx：1.00
+X：-0.30, Y：-0.10，gx：1.00
+X：-0.49, Y：-0.29，gx：0.96
+X：-0.67, Y：-0.47，gx：0.88
+X：-0.82, Y：-0.62，gx：0.79
+X：-0.96, Y：-0.73，gx：0.68
+X：-1.07, Y：-0.82，gx：0.57
+X：-1.17, Y：-0.88，gx：0.48
+X：-1.25, Y：-0.92，gx：0.39
+X：-1.31, Y：-0.95，gx：0.32
+X：-1.36, Y：-0.97，gx：0.26
+X：-1.40, Y：-0.98，gx：0.21
+X：-1.44, Y：-0.99，gx：0.17
+X：-1.46, Y：-0.99，gx：0.13
+X：-1.49, Y：-0.99，gx：0.11
+X：-1.50, Y：-1.00，gx：0.09
+X：-1.52, Y：-1.00，gx：0.07
+X：-1.53, Y：-1.00，gx：0.05
+X：-1.54, Y：-1.00，gx：0.04
+X：-1.54, Y：-1.00，gx：0.04
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} -1.5426802075384614
+\end{Verbatim}
+            
+    可以观察到使用梯度下降方法，可以找到一个极小值，就是当x为-1.54的时候，y得到-1，在这个范围中sin函数有很多个极小值，如果需要算出其它极小值，你需要把初始值更改一下试试。
+
+    \subsubsection{本课小结：}\label{ux672cux8bfeux5c0fux7ed3}
+
+\begin{itemize}
+\tightlist
+\item
+  最优化是非常关键的AI技术之一，它将是后续学习机器学习的重要概念。最优化的目标就是找到函数的极值，本课是介绍找极小值，如果是找极大值只需要将函数加个负号即可。
+\item
+  梯度下降法是一种局部的最优化技术，它是利用了函数的导数特性，顺着地势低处走，可以快速找到某个极小值。
+\item
+  遗传算法是利用自然界物竞天择的思路，每一代中选择能适应环境的个体进入下一代，它是一种可以找到全局最优的方法，不过在速度上会略慢。
+\end{itemize}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
